@@ -24,3 +24,23 @@ body {
   color: var(--foreground);
   font-family: Helvetica, Arial, sans-serif;
 }
+
+/* ...existing code... */
+
+.heart-bg{
+  background-size: cover;
+  background-position: center;
+  /* WebKit + standard mask for broad browser support */
+  -webkit-mask-image: url('/images/heart-mask.svg');
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: cover;
+  mask-image: url('/images/heart-mask.svg');
+  mask-repeat: no-repeat;
+  mask-size: cover;
+
+  /* keep content centered inside the heart */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
