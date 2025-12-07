@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 
 /**
  * FloatHearts
@@ -7,6 +8,7 @@ import React, { useEffect, useRef } from "react";
  * Renders absolutely-positioned heart elements and animates them with requestAnimationFrame.
  */
 export default function FloatHearts({ hearts }) {
+  const router = useRouter();
   const containerRef = useRef(null);
   const itemsRef = useRef([]);
   const stateRef = useRef({
@@ -17,6 +19,12 @@ export default function FloatHearts({ hearts }) {
     rafId: null,
     lastTs: null,
   });
+
+  const handleClick = (i) => {
+    const slug = hearts?.[i]?.fields?.slug;
+    if (!slug) return;
+    router.push(`/${slug}/home`);
+  };
 
   useEffect(() => {
     const container = containerRef.current;
@@ -184,6 +192,7 @@ export default function FloatHearts({ hearts }) {
         <div
           key={heart.sys.id}
           ref={(el) => (itemsRef.current[i] = el)}
+          onClick={() => handleClick(i)}
           className="heart-bg bg-white absolute w-42 h-42 p-4 shadow-md flex items-center justify-center"
           style={{ left: 0, top: 0, willChange: "transform", transition: "transform 0s", backgroundColor: colors[i % colors.length] }}
         >
