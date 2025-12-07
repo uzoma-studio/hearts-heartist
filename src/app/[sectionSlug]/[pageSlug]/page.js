@@ -1,6 +1,7 @@
 import React from "react";
 import { getEntries } from "@/lib/contentful";
 import Link from "next/link";
+import Image from "next/image";
 
 export default async function Page({ params }) {
   const { sectionSlug, pageSlug } = await params;
@@ -39,6 +40,12 @@ export default async function Page({ params }) {
 
   const { nextSection, prevSection } = calculateAdjacentSections();
 
+  // get header image URL and dimensions from page fields
+  const coverImage = page.fields?.coverImage?.fields?.file;
+  const coverImageUrl = coverImage?.url ? `https:${coverImage.url}` : null;
+  const coverImageWidth = page.fields?.coverImage?.fields?.file?.details?.image?.width || 1200;
+  const coverImageHeight = page.fields?.coverImage?.fields?.file?.details?.image?.height || 500;
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="relative w-[90vw] sm:w-[85vw] md:w-[95vw] h-[90vh] sm:h-[85vh] md:h-[95vh] bg-white/90 rounded-xl shadow-2xl overflow-auto">
@@ -47,7 +54,7 @@ export default async function Page({ params }) {
                 <Link href={`/${nextSection.fields.slug}/home`}>{nextSection.fields.title}</Link>
                 <Link href={`/${prevSection.fields.slug}/home`}>{prevSection.fields.title}</Link>
             </div>
-            <button className="w-12 h-full bg-red-500 text-white cursor-pointer">
+            <button className="w-12 h-full bg-red-500 text-white cursor-pointer hover:bg-red-700 transition-colors">
                 <Link href="/" className="block w-full h-full leading-[48px] text-center">X</Link>
             </button>
         </div>
@@ -57,7 +64,7 @@ export default async function Page({ params }) {
                 {
                     sectionPages.map((p) => (
                         <div key={p.sys.id} className="mx-4 py-2">
-                            <a href={`/${sectionSlug}/${p.fields.slug}`} className="text-blue-600 hover:underline">
+                            <a href={`/${sectionSlug}/${p.fields.slug}`} className={`text-blue-600 hover:underline ${p.fields.slug === pageSlug ? 'font-bold underline' : ''}`}>
                                 {p.fields.title}
                             </a>
                         </div>
@@ -65,6 +72,18 @@ export default async function Page({ params }) {
                 }
             </div>
         </div>
+        {/* Header image */}
+        {coverImageUrl && (
+          <div className="relative w-full h-96">
+            <Image
+              src={coverImageUrl}
+              alt={page.fields?.title}
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+        )}
         <h2 className="text-2xl font-semibold mb-4 p-6">{page.fields.title}</h2>
         {/* render other fields here */}
       </div>
