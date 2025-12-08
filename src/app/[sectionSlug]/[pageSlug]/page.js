@@ -2,6 +2,7 @@ import React from "react";
 import { getEntries } from "@/lib/contentful";
 import Link from "next/link";
 import Image from "next/image";
+import RichTextRenderer from "@/lib/richTextRenderer";
 
 export default async function Page({ params }) {
   const { sectionSlug, pageSlug } = await params;
@@ -85,7 +86,9 @@ export default async function Page({ params }) {
           </div>
         )}
         <h2 className="text-2xl font-semibold mb-4 p-6">{page.fields.title}</h2>
-        {/* render other fields here */}
+        <div className="p-6">
+          <RichTextRenderer content={page.fields?.content} />
+        </div>
       </div>
     </div>
   );
