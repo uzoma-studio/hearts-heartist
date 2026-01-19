@@ -1,16 +1,12 @@
 import React from 'react'
-import Image from 'next/image'
-import Footer from '@/components/footer'
 import { getEntries } from "@/lib/contentful";
 import ImageSlider from '@/components/image-slider';
 import Link from 'next/link';
+import Navbar from '@/components/navbar';
 
 const SeriousLayout = async () => {
 
     const arms = await getEntries('section', { select: 'fields.title, fields.slug, fields.coverImage' });
-
-    console.log(arms[0].fields.coverImage);
-    
 
     const images = [
       '/images/slider/slider1.jpg',
@@ -21,9 +17,7 @@ const SeriousLayout = async () => {
 
   return (
     <div className="w-full">
-        <div className='px-4 h-12 flex items-center'>
-            <p>Logo</p>
-        </div>
+      <Navbar />
       {/* HEADER IMAGE */}
       <div className="relative w-full h-[80vh]">
         <ImageSlider images={images} />
@@ -43,7 +37,7 @@ const SeriousLayout = async () => {
       </div>
 
       {/* ARMS GRID */}
-      <div className={`grid grid-cols-1 md:grid-cols-4 w-full h-[80vh]`}>
+      <div className={`grid grid-cols-1 md:grid-cols-5 w-full h-[80vh]`}>
         {arms.map((arm, idx) => (
           <Link
             key={idx}

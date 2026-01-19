@@ -3,6 +3,8 @@ import { getEntries } from "@/lib/contentful";
 import Link from "next/link";
 import Image from "next/image";
 import RichTextRenderer from "@/lib/richTextRenderer";
+import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
+import Navbar from "@/components/navbar";
 
 export default async function Page({ params }) {
   const { sectionSlug, pageSlug } = await params;
@@ -31,7 +33,7 @@ export default async function Page({ params }) {
       (s) => s.fields.slug === sectionSlug
     );
     const prevSection =
-      currentIndex > 0 ? sections[currentIndex - 1] : sections.length - 1;
+      currentIndex > 0 ? sections[currentIndex - 1] : sections[sections.length - 1];
     const nextSection =
       currentIndex < sections.length - 1
         ? sections[currentIndex + 1]
@@ -48,12 +50,13 @@ export default async function Page({ params }) {
   const coverImageHeight = page.fields?.coverImage?.fields?.file?.details?.image?.height || 500;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
-      <div className="relative w-[90vw] sm:w-[85vw] md:w-[95vw] h-[90vh] sm:h-[85vh] md:h-[95vh] bg-white/90 rounded-xl shadow-2xl overflow-auto">
-        <div className="w-full h-12 border-b border-gray-200 flex items-center justify-between">
+    <div className="fixed inset-0 z-50 flex items-center justify-center flex-col w-full">
+      <Navbar />
+      <div className="relative w-full h-full bg-white/90 overflow-auto">
+        <div className="w-full h-12 border-b border-t border-gray-200 flex items-center justify-between mt-4">
             <div className="flex w-full items-center justify-between px-4">
-                <Link href={`/${nextSection.fields.slug}/home`}>{nextSection.fields.title}</Link>
-                <Link href={`/${prevSection.fields.slug}/home`}>{prevSection.fields.title}</Link>
+                <Link href={`/${nextSection.fields.slug}/home`} className="flex items-center"><BsArrowLeft className="mx-2 text-2xl"/> {nextSection.fields.title}</Link>
+                <Link href={`/${prevSection.fields.slug}/home`} className="flex items-center">{prevSection.fields.title} <BsArrowRight className="mx-2 text-2xl"/></Link>
             </div>
             <button className="w-12 h-full bg-red-500 text-white cursor-pointer hover:bg-red-700 transition-colors">
                 <Link href="/" className="block w-full h-full leading-[48px] text-center">X</Link>
