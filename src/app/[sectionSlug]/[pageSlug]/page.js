@@ -50,31 +50,31 @@ export default async function Page({ params }) {
   const coverImageHeight = page.fields?.coverImage?.fields?.file?.details?.image?.height || 500;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center flex-col w-full">
-      <Navbar />
+    <div className="inset-0 z-50 flex items-center justify-center flex-col w-full">
+      {/* <Navbar /> */}
+      <div className="w-full h-16 border-b border-gray-200 flex items-center justify-between">
+          <div className="flex w-full items-center justify-between px-4 text-xl">
+              <Link href={`/${nextSection.fields.slug}/home`} className="flex items-center hover:text-[#E8B4B8]"><BsArrowLeft className="mx-2 text-3xl"/> {nextSection.fields.title}</Link>
+              <Link href={`/${prevSection.fields.slug}/home`} className="flex items-center hover:text-[#B8D4E3]">{prevSection.fields.title} <BsArrowRight className="mx-2 text-3xl"/></Link>
+          </div>
+          <button className="w-12 h-full bg-red-500 text-white cursor-pointer hover:bg-red-700 transition-colors">
+              <Link href="/" className="block w-full h-full leading-[48px] text-center text-2xl font-bold">X</Link>
+          </button>
+      </div>
       <div className="relative w-full h-full bg-white/90 overflow-auto">
-        <div className="w-full h-12 border-b border-t border-gray-200 flex items-center justify-between mt-4">
-            <div className="flex w-full items-center justify-between px-4">
-                <Link href={`/${nextSection.fields.slug}/home`} className="flex items-center"><BsArrowLeft className="mx-2 text-2xl"/> {nextSection.fields.title}</Link>
-                <Link href={`/${prevSection.fields.slug}/home`} className="flex items-center">{prevSection.fields.title} <BsArrowRight className="mx-2 text-2xl"/></Link>
-            </div>
-            <button className="w-12 h-full bg-red-500 text-white cursor-pointer hover:bg-red-700 transition-colors">
-                <Link href="/" className="block w-full h-full leading-[48px] text-center">X</Link>
-            </button>
-        </div>
-        <div className="w-full h-24 border-b border-gray-200 flex items-center justify-between p-6">
-            <h2 className="text-3xl font-semibold">{section.fields?.title}</h2>
-            <div className="flex">
-                {
-                    sectionPages.map((p) => (
-                        <div key={p.sys.id} className="mx-4 py-2">
-                            <a href={`/${sectionSlug}/${p.fields.slug}`} className={`text-blue-600 hover:underline ${p.fields.slug === pageSlug ? 'font-bold underline' : ''}`}>
-                                {p.fields.title}
-                            </a>
-                        </div>
-                    ))
-                }
-            </div>
+        <div className="w-full h-24 border-b border-gray-200 flex items-center justify-between p-6 md:px-12">
+          <h2 className="text-4xl font-semibold">{section.fields?.title}</h2>
+          <div className="flex">
+              {
+                  sectionPages.map((p) => (
+                      <div key={p.sys.id} className="ml-4 py-2">
+                          <a href={`/${sectionSlug}/${p.fields.slug}`} className={`text-blue-600 hover:underline ${p.fields.slug === pageSlug ? 'font-bold underline' : ''}`}>
+                              {p.fields.title}
+                          </a>
+                      </div>
+                  ))
+              }
+          </div>
         </div>
         {/* Header image */}
         {coverImageUrl && (
@@ -88,9 +88,20 @@ export default async function Page({ params }) {
             />
           </div>
         )}
-        <h2 className="text-2xl font-semibold mb-4 p-6">{page.fields.title}</h2>
-        <div className="p-6">
-          <RichTextRenderer content={page.fields?.content} />
+        <div className="p-6 md:p-12">
+          <h2 className="text-4xl font-semibold">{page.fields.title}</h2>
+          <div>
+            <RichTextRenderer content={page.fields?.content} />
+          </div>
+        </div>
+        <div className="w-full h-12 border-b border-t border-gray-200 flex items-center justify-between mt-4">
+            <div className="flex w-full items-center justify-between px-4">
+                <Link href={`/${nextSection.fields.slug}/home`} className="flex items-center"><BsArrowLeft className="mx-2 text-2xl"/> {nextSection.fields.title}</Link>
+                <Link href={`/${prevSection.fields.slug}/home`} className="flex items-center">{prevSection.fields.title} <BsArrowRight className="mx-2 text-2xl"/></Link>
+            </div>
+            <button className="w-12 h-full bg-red-500 text-white cursor-pointer hover:bg-red-700 transition-colors">
+                <Link href="/" className="block w-full h-full leading-[48px] text-center">X</Link>
+            </button>
         </div>
       </div>
     </div>

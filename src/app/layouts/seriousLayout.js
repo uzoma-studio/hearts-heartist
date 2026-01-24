@@ -20,7 +20,7 @@ const SeriousLayout = async () => {
       <Navbar />
       
       {/* HEADER IMAGE WITH OVERLAY TEXT */}
-      <div className="relative w-full h-[85vh] md:h-[90vh] overflow-hidden">
+      <div className="relative w-full h-[85vh] md:h-[90vh] overflow-hidden pt-16 md:pt-20">
         <ImageSlider images={images} />
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
         <div className="absolute inset-0 flex items-center justify-center">
