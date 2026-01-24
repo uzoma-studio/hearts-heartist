@@ -1,47 +1,123 @@
 import React from "react";
 import Image from "next/image";
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import Link from "next/link";
+import {
+  documentToReactComponents,
+} from "@contentful/rich-text-react-renderer";
+import {
+  BLOCKS,
+  INLINES,
+  MARKS,
+} from "@contentful/rich-text-types";
 
 const options = {
+  renderMark: {
+    [MARKS.BOLD]: (text) => (
+      <strong className="font-semibold">{text}</strong>
+    ),
+    [MARKS.ITALIC]: (text) => (
+      <em className="italic">{text}</em>
+    ),
+  },
+
   renderNode: {
-    'embedded-asset-block': (node) => {
-      const { title, file } = node.data.target.fields;
+    /* ------------------ HEADINGS ------------------ */
+    [BLOCKS.HEADING_1]: (_, children) => (
+      <h1 className="text-3xl md:text-4xl font-semibold my-6">
+        {children}
+      </h1>
+    ),
+    [BLOCKS.HEADING_2]: (_, children) => (
+      <h2 className="text-2xl md:text-3xl font-semibold my-5">
+        {children}
+      </h2>
+    ),
+    [BLOCKS.HEADING_3]: (_, children) => (
+      <h3 className="text-xl md:text-2xl font-semibold my-4">
+        {children}
+      </h3>
+    ),
+
+    /* ------------------ TEXT ------------------ */
+    [BLOCKS.PARAGRAPH]: (_, children) => (
+      <p className="my-4 leading-relaxed text-base">
+        {children}
+      </p>
+    ),
+
+    /* ------------------ LISTS ------------------ */
+    [BLOCKS.UL_LIST]: (_, children) => (
+      <ul className="list-disc pl-6 my-4 space-y-2">
+        {children}
+      </ul>
+    ),
+    [BLOCKS.OL_LIST]: (_, children) => (
+      <ol className="list-decimal pl-6 my-4 space-y-2">
+        {children}
+      </ol>
+    ),
+    [BLOCKS.LIST_ITEM]: (_, children) => (
+      <li className="leading-relaxed">
+        {children}
+      </li>
+    ),
+
+    /* ------------------ LINKS ------------------ */
+    [INLINES.HYPERLINK]: (node, children) => {
+      const url = node.data.uri;
+
+      const isExternal = url.startsWith("http");
+
+      if (isExternal) {
+        return (
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline underline-offset-4 hover:opacity-80 transition-opacity"
+          >
+            {children}
+          </a>
+        );
+      }
+
       return (
-        <div className="my-4">
+        <Link
+          href={url}
+          className="underline underline-offset-4 hover:opacity-80 transition-opacity"
+        >
+          {children}
+        </Link>
+      );
+    },
+
+    /* ------------------ IMAGES ------------------ */
+    [BLOCKS.EMBEDDED_ASSET]: (node) => {
+      const { title, file } = node.data.target.fields;
+
+      return (
+        <div className="my-8 flex justify-center">
           <Image
             src={`https:${file.url}`}
-            alt={title}
+            alt={title || ""}
             width={file.details.image.width}
             height={file.details.image.height}
-            style={{maxWidth: '50%', borderRadius: '10px'}}
-            className="object-cover"
+            className="rounded-lg object-cover max-w-full md:max-w-[50%]"
           />
         </div>
       );
     },
-    'heading-1': (node) => <h1 className="text-3xl font-bold my-4">{node.content[0].value}</h1>,
-    'heading-2': (node) => <h2 className="text-2xl font-semibold my-4">{node.content[0].value}</h2>,
-    'heading-3': (node) => <h3 className="text-xl font-semibold my-4">{node.content[0].value}</h3>,
-    'paragraph': (node) => <p className="my-4">{node.content[0].value}</p>,
-    'unordered-list': (node) => (
-      <ul className="list-disc list-inside my-4">
-        {node.content.map((listItem, index) => (
-          <span key={index}>{documentToReactComponents(listItem)}</span>
-        ))}
-      </ul>
-    ),
-    'ordered-list': (node) => (
-      <ol className="list-decimal list-inside my-4">
-        {node.content.map((listItem, index) => (
-          <span key={index}>{documentToReactComponents(listItem)}</span>
-        ))}
-      </ol>
-    ),
   },
 };
 
 const RichTextRenderer = ({ content }) => {
-  return <>{documentToReactComponents(content, options)}</>;
+  if (!content) return null;
+
+  return (
+    <div className="rich-text">
+      {documentToReactComponents(content, options)}
+    </div>
+  );
 };
 
 export default RichTextRenderer;
