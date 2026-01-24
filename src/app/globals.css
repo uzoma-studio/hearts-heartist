@@ -3,6 +3,31 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  
+  /* Brand colors */
+  --color-mint-soft: #55EFC4;        /* fresh, calming, communal */
+  --color-lavender-warm: #A29BFE;   /* gentle creativity, reflective */
+  --color-sun-cream: #FFEAA7;       /* warmth, openness */
+  --color-blush-clay: #FAB1A0;      /* human, earthy warmth */
+  --color-sky-soft: #74B9FF;        /* clarity, openness */
+  --color-honey-light: #FDCB6E;     /* nourishment, optimism */
+  --color-lime-soft: #BADC58;       /* growth, vitality */
+  --color-aqua-calm: #7ED6DF;       /* wellness, flow */
+  --color-amber-soft: #FFBE76;      /* grounded warmth */
+  --color-turquoise-bright: #34E7E4;/* energy, creativity */
+  
+  /* Earthy palette */
+  --color-warm-bg: #FAF8F5;
+  --color-warm-bg-alt: #F5F1EB;
+  --color-border: #E8DED0;
+  --color-text-primary: #3A3A3A;
+  --color-text-secondary: #6B6B6B;
+  --color-text-tertiary: #8B8B8B;
+  --color-text-quaternary: #9B9B9B;
+  
+  /* Accent colors */
+  --color-pink: #E8B4B8;
+  --color-blue: #B8D4E3;
 }
 
 @theme inline {

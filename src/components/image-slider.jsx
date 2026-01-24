@@ -3,8 +3,15 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 
-export default function ImageSlider({ images, intervalMs = 4000 }) {
+export default function ImageSlider({ intervalMs = 4000 }) {
   const [index, setIndex] = useState(0)
+
+  const images = [
+    '/images/slider/slider1.jpg',
+    '/images/slider/slider2.jpg',
+    '/images/slider/slider3.jpg',
+    '/images/slider/slider4.jpg',
+  ];
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -19,12 +26,12 @@ export default function ImageSlider({ images, intervalMs = 4000 }) {
 
   return (
     <div className="relative h-full w-full overflow-hidden">
-      <div className="absolute inset-0 transition-opacity duration-700 ease-in-out">
+      <div className="absolute inset-0 transition-opacity duration-700 ease-in-out bg-[var(--color-blush-clay)]">
         <Image
           src={images[index]}
           alt={`slide-${index}`}
           fill
-          className="object-cover"
+          className="object-cover p-12 border-2 rounded-3xl shadow-sm"
           priority={index === 0}
         />
       </div>

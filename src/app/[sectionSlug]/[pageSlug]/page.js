@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import RichTextRenderer from "@/lib/richTextRenderer";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
-import Navbar from "@/components/navbar";
 
 export default async function Page({ params }) {
   const { sectionSlug, pageSlug } = await params;
@@ -46,8 +45,24 @@ export default async function Page({ params }) {
   // get header image URL and dimensions from page fields
   const coverImage = page.fields?.coverImage?.fields?.file;
   const coverImageUrl = coverImage?.url ? `https:${coverImage.url}` : null;
-  const coverImageWidth = page.fields?.coverImage?.fields?.file?.details?.image?.width || 1200;
-  const coverImageHeight = page.fields?.coverImage?.fields?.file?.details?.image?.height || 500;
+
+  // Assign brand color to section based on index
+  const brandColors = [
+    'var(--color-turquoise-bright)',
+    'var(--color-amber-soft)',
+    'var(--color-aqua-calm)',
+    'var(--color-lime-soft)',
+    'var(--color-mint-soft)',
+    'var(--color-lavender-warm)',
+    'var(--color-sun-cream)',
+    'var(--color-blush-clay)',
+    'var(--color-sky-soft)',
+    'var(--color-honey-light)',
+  ];
+  const currentSectionIndex = sections.findIndex(
+    (s) => s.fields.slug === sectionSlug
+  );
+  const sectionBgColor = brandColors[currentSectionIndex % brandColors.length];
 
   return (
     <div className="inset-0 z-50 flex items-center justify-center flex-col w-full">
@@ -61,16 +76,23 @@ export default async function Page({ params }) {
               <Link href="/" className="block w-full h-full leading-[48px] text-center text-2xl font-bold">X</Link>
           </button>
       </div>
-      <div className="relative w-full h-full bg-white/90 overflow-auto">
+      <div 
+        className="relative w-full h-full overflow-auto"
+        style={{ backgroundColor: sectionBgColor }}
+      >
         <div className="w-full h-24 border-b border-gray-200 flex items-center justify-between p-6 md:px-12">
           <h2 className="text-4xl font-semibold">{section.fields?.title}</h2>
           <div className="flex">
               {
-                  sectionPages.map((p) => (
+                  [...sectionPages].sort((a, b) => {
+                      const titleA = a.fields?.title || '';
+                      const titleB = b.fields?.title || '';
+                      return titleA.localeCompare(titleB);
+                  }).map((p) => (
                       <div key={p.sys.id} className="ml-4 py-2">
-                          <a href={`/${sectionSlug}/${p.fields.slug}`} className={`text-blue-600 hover:underline ${p.fields.slug === pageSlug ? 'font-bold underline' : ''}`}>
+                          <Link href={`/${sectionSlug}/${p.fields.slug}`} className={`text-black-200 hover:underline ${p.fields.slug === pageSlug ? 'font-bold underline' : ''}`}>
                               {p.fields.title}
-                          </a>
+                          </Link>
                       </div>
                   ))
               }

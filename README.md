@@ -1,6 +1,6 @@
 TODOs:
-- Update UI styling
-- Fix formatting issues with content in site sub-pages
+[o] Update UI styling
+[x] Fix formatting issues with content in site sub-pages
 - Update content (request from team)
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).

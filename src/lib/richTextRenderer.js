@@ -40,7 +40,7 @@ const options = {
 
     /* ------------------ TEXT ------------------ */
     [BLOCKS.PARAGRAPH]: (_, children) => (
-      <p className="my-4 leading-relaxed text-base">
+      <p className="my-4 leading-relaxed text-base text-md text-gray-700">
         {children}
       </p>
     ),
