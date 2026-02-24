@@ -23,17 +23,17 @@ const options = {
   renderNode: {
     /* ------------------ HEADINGS ------------------ */
     [BLOCKS.HEADING_1]: (_, children) => (
-      <h1 className="text-3xl md:text-4xl font-semibold my-6">
+      <h1 className="text-3xl md:text-4xl font-semibold my-6" style={{ fontFamily: 'var(--font-fraunces)' }}>
         {children}
       </h1>
     ),
     [BLOCKS.HEADING_2]: (_, children) => (
-      <h2 className="text-2xl md:text-3xl font-semibold my-5">
+      <h2 className="text-2xl md:text-3xl font-semibold my-5" style={{ fontFamily: 'var(--font-fraunces)' }}>
         {children}
       </h2>
     ),
     [BLOCKS.HEADING_3]: (_, children) => (
-      <h3 className="text-xl md:text-2xl font-semibold my-4">
+      <h3 className="text-xl md:text-2xl font-semibold my-4" style={{ fontFamily: 'var(--font-fraunces)' }}>
         {children}
       </h3>
     ),

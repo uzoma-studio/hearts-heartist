@@ -26,12 +26,12 @@ export default function ImageSlider({ intervalMs = 4000 }) {
 
   return (
     <div className="relative h-full w-full overflow-hidden">
-      <div className="absolute inset-0 transition-opacity duration-700 ease-in-out bg-[var(--color-blush-clay)]">
+      <div className="absolute inset-0 transition-opacity duration-700 ease-in-out bg-[var(--color-warm-bg-alt)]">
         <Image
           src={images[index]}
           alt={`slide-${index}`}
           fill
-          className="object-cover p-12 border-2 rounded-3xl shadow-sm"
+          className="object-cover md:p-12 border-2 rounded-3xl shadow-sm"
           priority={index === 0}
         />
       </div>

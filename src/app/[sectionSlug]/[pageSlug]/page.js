@@ -65,12 +65,12 @@ export default async function Page({ params }) {
   const sectionBgColor = brandColors[currentSectionIndex % brandColors.length];
 
   return (
-    <div className="inset-0 z-50 flex items-center justify-center flex-col w-full">
+    <div className="inset-0 z-50 flex items-center justify-center flex-col w-full h-screen">
       {/* <Navbar /> */}
       <div className="w-full h-16 border-b border-gray-200 flex items-center justify-between">
           <div className="flex w-full items-center justify-between px-4 text-xl">
-              <Link href={`/${nextSection.fields.slug}/home`} className="flex items-center hover:text-[#E8B4B8]"><BsArrowLeft className="mx-2 text-3xl"/> {nextSection.fields.title}</Link>
-              <Link href={`/${prevSection.fields.slug}/home`} className="flex items-center hover:text-[#B8D4E3]">{prevSection.fields.title} <BsArrowRight className="mx-2 text-3xl"/></Link>
+              <Link href={`/${nextSection.fields.slug}/home`} className="flex items-center hover:text-[var(--color-pink)] text-xs md:text-sm"><BsArrowLeft className="mx-2 text-lg md:text-3xl"/> {nextSection.fields.title}</Link>
+              <Link href={`/${prevSection.fields.slug}/home`} className="flex items-center hover:text-[var(--color-blue)] text-xs md:text-sm">{prevSection.fields.title} <BsArrowRight className="mx-2 text-lg md:text-3xl"/></Link>
           </div>
           <button className="w-12 h-full bg-red-500 text-white cursor-pointer hover:bg-red-700 transition-colors">
               <Link href="/" className="block w-full h-full leading-[48px] text-center text-2xl font-bold">X</Link>
@@ -80,17 +80,17 @@ export default async function Page({ params }) {
         className="relative w-full h-full overflow-auto"
         style={{ backgroundColor: sectionBgColor }}
       >
-        <div className="w-full h-24 border-b border-gray-200 flex items-center justify-between p-6 md:px-12">
-          <h2 className="text-4xl font-semibold">{section.fields?.title}</h2>
+        <div className="w-full h-24 border-b border-gray-200 flex items-center max-md:flex-col max-md:h-auto text-center justify-between p-6 md:px-12">
+          <h2 className="max-md:text-2xl max-md:mb-2 text-4xl font-semibold" style={{ fontFamily: 'var(--font-fraunces)' }}>{section.fields?.title}</h2>
           <div className="flex">
               {
                   [...sectionPages].sort((a, b) => {
                       const titleA = a.fields?.title || '';
                       const titleB = b.fields?.title || '';
                       return titleA.localeCompare(titleB);
-                  }).map((p) => (
+                  }).map((p, index) => (
                       <div key={p.sys.id} className="ml-4 py-2">
-                          <Link href={`/${sectionSlug}/${p.fields.slug}`} className={`text-black-200 hover:underline ${p.fields.slug === pageSlug ? 'font-bold underline' : ''}`}>
+                          <Link href={`/${sectionSlug}/${p.fields.slug}`} className={`text-black-200 hover:underline ${p.fields.slug === pageSlug || index === 0 ? 'font-bold underline' : ''}`}>
                               {p.fields.title}
                           </Link>
                       </div>
@@ -111,15 +111,15 @@ export default async function Page({ params }) {
           </div>
         )}
         <div className="p-6 md:p-12">
-          <h2 className="text-4xl font-semibold">{page.fields.title}</h2>
+          <h2 className="text-4xl font-semibold" style={{ fontFamily: 'var(--font-fraunces)' }}>{page.fields.title}</h2>
           <div>
             <RichTextRenderer content={page.fields?.content} />
           </div>
         </div>
         <div className="w-full h-12 border-b border-t border-gray-200 flex items-center justify-between mt-4">
             <div className="flex w-full items-center justify-between px-4">
-                <Link href={`/${nextSection.fields.slug}/home`} className="flex items-center"><BsArrowLeft className="mx-2 text-2xl"/> {nextSection.fields.title}</Link>
-                <Link href={`/${prevSection.fields.slug}/home`} className="flex items-center">{prevSection.fields.title} <BsArrowRight className="mx-2 text-2xl"/></Link>
+                <Link href={`/${nextSection.fields.slug}/home`} className="flex items-center text-xs md:text-sm"><BsArrowLeft className="mx-2 text-2xl"/> {nextSection.fields.title}</Link>
+                <Link href={`/${prevSection.fields.slug}/home`} className="flex items-center text-xs md:text-sm">{prevSection.fields.title} <BsArrowRight className="mx-2 text-2xl"/></Link>
             </div>
             <button className="w-12 h-full bg-red-500 text-white cursor-pointer hover:bg-red-700 transition-colors">
                 <Link href="/" className="block w-full h-full leading-[48px] text-center">X</Link>
