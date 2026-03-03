@@ -19,7 +19,7 @@ const SeriousLayout = async () => {
         <ImageSlider />
         <div className="absolute inset-0" />
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center px-6 max-w-4xl mx-auto space-y-6 bg-black/15 rounded-3xl shadow-sm backdrop-blur-sm md:backdrop-blur-0">
+          {/* <div className="text-center px-6 max-w-4xl mx-auto space-y-6 bg-black/15 rounded-3xl shadow-sm backdrop-blur-sm md:backdrop-blur-0">
             <h1 
               className="text-5xl md:text-7xl lg:text-8xl font-normal text-white leading-tight tracking-tight"
               style={{ fontFamily: 'var(--font-fraunces)' }}
@@ -29,7 +29,7 @@ const SeriousLayout = async () => {
             <p className="text-lg md:text-xl text-white/95 font-light max-w-2xl mx-auto leading-relaxed">
               A community space for wellness, creativity, and social change
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
 

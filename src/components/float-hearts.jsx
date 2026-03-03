@@ -184,7 +184,18 @@ export default function FloatHearts({ hearts }) {
     };
   }, [hearts]);
 
-  const colors = [ "#ffeaa7", "#fab1a0", "#55efc4", "#74b9ff", "#a29bfe", "#fdcb6e", "#badc58", "#7ed6df", "#ffbe76", "#34e7e4" ]
+  const colors = [
+    "#ACC8E5",
+    "#CFE6B8",
+    "#BFE8D5",
+    "#DDEBCF",
+    "#BFD8C2",
+    "#E8F2E5",
+    "#B4D7C1",
+    "#DCE8D4",
+    "#F4F7F2",
+    "#9BC8A5",
+  ];
 
   return (
     <div ref={containerRef} className="w-full h-full relative overflow-hidden">
@@ -193,10 +204,12 @@ export default function FloatHearts({ hearts }) {
           key={heart.sys.id}
           ref={(el) => (itemsRef.current[i] = el)}
           onClick={() => handleClick(i)}
-          className="heart-bg bg-white absolute w-42 h-42 p-4 shadow-md flex items-center justify-center"
+          className="heart-bg bg-white absolute w-32 h-32 md:w-40 md:h-40 p-3 md:p-4 shadow-md flex items-center justify-center"
           style={{ left: 0, top: 0, willChange: "transform", transition: "transform 0s", backgroundColor: colors[i % colors.length] }}
         >
-          <p className="mb-2 text-center pointer-events-none">{heart.fields.title}</p>
+          <p className="mb-2 text-center pointer-events-none text-[#112A46] text-xs md:text-sm font-medium">
+            {heart.fields.title}
+          </p>
         </div>
       ))}
     </div>
