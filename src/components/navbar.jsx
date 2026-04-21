@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const Navbar = () => {
     return (
@@ -9,9 +10,16 @@ const Navbar = () => {
               className="flex items-center gap-3 text-xl md:text-2xl text-[var(--color-text-primary)] font-normal tracking-tight hover:text-[var(--color-pink)] transition-colors duration-300"
               style={{ fontFamily: 'var(--font-fraunces)' }}
             >
-              <span className="h-9 w-9 md:h-10 md:w-10 rounded-full bg-white/80 text-[var(--color-text-primary)] flex items-center justify-center text-[10px] md:text-xs font-semibold shadow-sm">
-                Logo
-              </span>
+                            <span className="relative h-9 w-9 md:h-10 md:w-10 rounded-full bg-white/80 shadow-sm overflow-hidden">
+                                <Image
+                                    src="/images/logo.PNG"
+                                    alt="Hearts Heartist logo"
+                                    fill
+                                    sizes="40px"
+                                    className="object-contain p-1"
+                                    priority
+                                />
+                            </span>
               <span className="hidden md:inline">Hearts Heartist</span>
             </Link>
             <div className="flex space-x-4 md:space-x-8 text-sm md:text-base">

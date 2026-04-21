@@ -96,8 +96,14 @@ const SeriousLayout = async () => {
               </div>
               {/* Logo placeholder */}
               <div className="absolute top-4 left-4 flex items-center gap-2">
-                <div className="h-10 w-10 rounded-full bg-white/80 text-[var(--color-text-primary)] flex items-center justify-center text-xs font-semibold shadow-sm">
-                  Logo
+                <div className="relative h-10 w-10 rounded-full bg-white/80 shadow-sm overflow-hidden">
+                  <Image
+                    src="/images/logo.PNG"
+                    alt="Hearts Heartist logo"
+                    fill
+                    sizes="40px"
+                    className="object-contain p-1"
+                  />
                 </div>
               </div>
               {/* Title */}
@@ -128,8 +134,14 @@ const SeriousLayout = async () => {
 
           {/* LOGO / NAME */}
           <div className="space-y-3 flex flex-col items-center">
-            <div className="h-14 w-14 rounded-full bg-white/80 text-[var(--color-text-primary)] flex items-center justify-center text-xs font-semibold shadow-sm">
-              Logo
+            <div className="relative h-14 w-14 rounded-full bg-white/80 shadow-sm overflow-hidden">
+              <Image
+                src="/images/logo.PNG"
+                alt="Hearts Heartist logo"
+                fill
+                sizes="56px"
+                className="object-contain p-1"
+              />
             </div>
             <p 
               className="text-3xl md:text-4xl text-[var(--color-text-primary)] font-normal tracking-wide"
