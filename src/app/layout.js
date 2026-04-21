@@ -48,10 +48,10 @@ export const metadata = {
   },
   icons: {
     icon: [
-      { url: socialImagePath, type: "image/png" },
+      { url: "/favicon.ico", type: "image/x-icon" },
     ],
     apple: [
-      { url: socialImagePath, type: "image/png" },
+      { url: "/apple-icon.png", type: "image/png" },
     ],
   },
   openGraph: {
